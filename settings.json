@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/opencv-4120.jar"
+    ],
+    "java.compile.nullAnalysis.mode": "disabled"
+}

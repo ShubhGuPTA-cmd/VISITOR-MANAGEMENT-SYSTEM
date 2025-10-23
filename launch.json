@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch FaceRecognition",
+            "request": "launch",
+            "mainClass": "com.example.Shubh.App",
+            "projectName": "FaceRecognitionDesktop",
+            "vmArgs": "-Djava.library.path=./lib",
+            "classpath": [
+                "${workspaceFolder}/target/classes",
+                "${workspaceFolder}/lib/opencv-4120.jar"
+            ]
+        }
+    ]
+}
