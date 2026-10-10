@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visitor approval</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="/static/css/app.css"></head>
+<body><div class="ap"><div class="box" id="box"><div class="in">Loading...</div></div></div>
+<script src="/static/js/common.js"></script>
+<script>
+const token = {{ token|tojson }};
+async function load() {
+  try {
+    const v = await api('/api/approve/' + token);
+    const box = $('#box');
+    if (v.status !== 'pending') {
+      box.innerHTML = `${v.snapshot_url ? `<img src="${v.snapshot_url}">` : ''}<div class="in"><h2>${esc(v.name)}</h2>
+        <p>This request was already handled: <span class="badge ${v.status}">${v.status}</span></p></div>`; return; }
+    box.innerHTML = `<img src="${v.snapshot_url}"><div class="in"><span class="badge pending">Waiting at the door</span>
+      <h2 style="margin-top:10px">${esc(v.name)}</h2>
+      <p style="color:var(--muted);margin:6px 0 0">${v.purpose ? 'Purpose: ' + esc(v.purpose) : 'No purpose given'}${v.host_name ? '<br>Visiting: ' + esc(v.host_name) : ''}</p>
+      <label class="chk"><input type="checkbox" id="rem"> Remember this person's face for next time</label>
+      <div class="btns"><button class="btn bad lg" id="no">Deny</button><button class="btn ok lg" id="yes">Approve</button></div></div>`;
+    const act = async d => { await api('/api/approve/' + token, { method: 'POST', body: { decision: d, remember: $('#rem').checked } }); load(); };
+    $('#yes').onclick = () => act('approve'); $('#no').onclick = () => act('deny');
+  } catch (e) { $('#box').innerHTML = `<div class="in"><h2>Not found</h2><p>This link is invalid.</p></div>`; }
+}
+load();
+</script></body></html>

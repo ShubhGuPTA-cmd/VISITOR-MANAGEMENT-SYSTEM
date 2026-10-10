@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ org }} - Admin</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="/static/css/app.css"></head>
+<body>
+<div id="loginView" class="login" style="display:none">
+  <div class="box"><div class="logo" style="width:48px;height:48px;font-size:26px">&#128100;</div>
+    <h2>{{ org }}</h2><p>Sign in to manage visitors</p>
+    <div class="field"><label>Username</label><input id="lu" autocomplete="username" value="admin"></div>
+    <div class="field"><label>Password</label><input id="lp" type="password" autocomplete="current-password"></div>
+    <div class="err" id="lerr"></div><button class="btn lg" style="width:100%" id="lbtn">Sign in</button></div>
+</div>
+
+<div id="appView" class="shell" style="display:none">
+  <aside class="side">
+    <div class="brand"><div class="logo">&#128100;</div><span>{{ org }}</span></div>
+    <button class="nav on" data-v="dash">&#128202; Dashboard <span class="dot" id="pdot">0</span></button>
+    <button class="nav" data-v="visits">&#128203; Visit log</button>
+    <button class="nav" data-v="people">&#128101; People &amp; faces</button>
+    <button class="nav" data-v="hosts">&#127970; Hosts</button>
+    <button class="nav" data-v="settings">&#9881;&#65039; Settings</button>
+    <div style="flex:1"></div>
+    <a class="nav" href="/" target="_blank" style="text-decoration:none">&#128249; Open kiosk</a>
+    <button class="nav" id="logout">&#128682; Sign out</button>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+
+<div class="modal-bg" id="modalBg"><div class="modal" id="modal"></div></div>
+<div class="lightbox" id="lb"><img id="lbimg"></div>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/admin.js"></script>
+</body></html>
